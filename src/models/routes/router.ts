@@ -17,7 +17,7 @@ router.put('/events/:id', async (req, res) => {
   }
 })
 
-router.put('/events/:id', async (req, res) => {
+router.get('/events/:id', async (req, res) => {
   try {
     res.send(await event.findById(req.params.id))
   } catch (e: any) {

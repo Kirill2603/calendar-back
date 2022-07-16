@@ -28,7 +28,7 @@ exports.router.put('/events/:id', (req, res) => __awaiter(void 0, void 0, void 0
         res.send(e.message);
     }
 }));
-exports.router.put('/events/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.get('/events/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         res.send(yield eventModel_1.event.findById(req.params.id));
     }
