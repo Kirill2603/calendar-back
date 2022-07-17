@@ -29,7 +29,6 @@ router.get('/events/:id', async (req, res) => {
 router.get('/events', async (req, res) => {
   if (req.query.start && req.query.end) {
     try {
-      console.log(req.query.start, req.query.end);
       const eventsForMonth = await event.find({date: {$gte: req.query.start, $lte: req.query.end}})
       res.send(eventsForMonth)
     } catch (e: any) {
