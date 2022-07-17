@@ -1,10 +1,10 @@
 import express, { Express } from 'express'
 import mongoose from 'mongoose'
-import { router } from './models/routes/router'
+import { router } from './routes/router'
 import cors from 'cors'
 
 const app: Express = express()
-const port = 3000
+const port = 3001
 const DB_URL = 'mongodb+srv://kirill:kirill@cluster0.9120nn6.mongodb.net/calendar?retryWrites=true&w=majority'
 
 
