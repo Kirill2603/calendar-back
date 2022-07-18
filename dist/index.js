@@ -17,15 +17,16 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const router_1 = require("./routes/router");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = 3001;
+const port = process.env.PORT || 3001;
 const DB_URL = 'mongodb+srv://kirill:kirill@cluster0.9120nn6.mongodb.net/calendar?retryWrites=true&w=majority';
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use('/api', router_1.router);
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.end(`<div>Hello</div>`);
 });
+app.use('/api', router_1.router);
+app.get('/favicon.ico', (req, res) => res.status(204));
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(DB_URL);
