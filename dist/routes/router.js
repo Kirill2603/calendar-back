@@ -40,7 +40,6 @@ exports.router.get('/events/:id', (req, res) => __awaiter(void 0, void 0, void 0
 exports.router.get('/events', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.query.start && req.query.end) {
         try {
-            console.log(req.query.start, req.query.end);
             const eventsForMonth = yield eventModel_1.event.find({ date: { $gte: req.query.start, $lte: req.query.end } });
             res.send(eventsForMonth);
         }
