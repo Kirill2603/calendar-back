@@ -7,8 +7,8 @@ const EventSchema = new mongoose.Schema({
   color: { type: String, enum: ['red', 'green', 'blue', 'purple', 'orange', 'yellow'], default: 'green' },
   date: { type: Date, required: true },
   is_done: { type: Boolean, default: false },
-  from: { type: Date, default: null },
-  to: { type: Date, default: null },
+  start: { type: Date, default: null },
+  end: { type: Date, default: null },
 }, { collection: 'events' })
 
 export const event = mongoose.model('event', EventSchema)
