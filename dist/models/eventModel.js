@@ -28,11 +28,11 @@ const mongoose = __importStar(require("mongoose"));
 const EventSchema = new mongoose.Schema({
     title: { type: String, required: [true, 'Please enter event title'], minLength: 3, maxLength: 100 },
     description: { type: String, required: false, minLength: 3, maxLength: 100, default: '' },
-    priority: { type: String, enum: ['low', 'middle', 'high'], default: 'low' },
+    priority: { type: Number, min: 0, max: 3, default: 0 },
     color: { type: String, enum: ['red', 'green', 'blue', 'purple', 'orange', 'yellow'], default: 'green' },
     date: { type: Date, required: true },
     is_done: { type: Boolean, default: false },
-    from: { type: Date, default: null },
-    to: { type: Date, default: null },
+    start: { type: Date, default: null },
+    end: { type: Date, default: null },
 }, { collection: 'events' });
 exports.event = mongoose.model('event', EventSchema);

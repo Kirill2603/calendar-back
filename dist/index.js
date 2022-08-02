@@ -17,8 +17,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const router_1 = require("./routes/router");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3001;
 const DB_URL = 'mongodb+srv://kirill:kirill@cluster0.9120nn6.mongodb.net/calendar?retryWrites=true&w=majority';
+const PORT = process.env.PORT || 3000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
@@ -27,11 +27,11 @@ app.get('/', (req, res) => {
 });
 app.use('/api', router_1.router);
 app.get('/favicon.ico', (req, res) => res.status(204));
-app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
+app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(DB_URL);
         mongoose_1.default.set('runValidators', true);
-        console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+        console.log(`⚡️[server]: Server is running at http://localhost:${process.env.PORT || 3001}`);
     }
     catch (e) {
         console.log(e);
