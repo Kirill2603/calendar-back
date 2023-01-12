@@ -2,7 +2,7 @@ import express, { Express} from "express";
 import cors from "cors";
 import "dotenv/config";
 import {eventsRouter} from "./routes/eventsRouter";
-import {runDb} from "./db";
+import {runDb} from "./db/db";
 
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.MONGODB_URI;

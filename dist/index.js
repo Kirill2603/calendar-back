@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 const eventsRouter_1 = require("./routes/eventsRouter");
-const db_1 = require("./db");
+const db_1 = require("./db/db");
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.MONGODB_URI;
 if (!DB_URL) {

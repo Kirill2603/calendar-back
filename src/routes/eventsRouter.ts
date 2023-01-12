@@ -19,12 +19,14 @@ eventsRouter.put('/:id', async (req, res) => {
 })
 
 eventsRouter.get('/:id', async (req, res) => {
-  try {
-    res.send(await event.findById(req.params.id))
-  } catch (e: any) {
-    res.statusCode = 500
-    res.send(e.message)
-  }
+  // try {
+  //   res.send(await event.findById(req.params.id))
+  // } catch (e: any) {
+  //   res.statusCode = 500
+  //   res.send(e.message)
+  // }
+  const event = await eventsRepository.getEvent(req.params.id)
+  res.send(event)
 })
 
 eventsRouter.get('/', async (req, res) => {
@@ -43,19 +45,24 @@ eventsRouter.get('/', async (req, res) => {
 //       res.send(e.message)
 //     }
 // }
-  const events = await eventsRepository.getEvents()
-  res.send(events)
+  if (req.query.start && req.query.end) {
+    res.send(await eventsRepository.getEventsInterval(req.query.start as any, req.query.end as any))
+  } else res.send(await eventsRepository.getEvents())
+
+
 })
 
 eventsRouter.post('/', async (req, res) => {
-  try {
-
-    const newEvent = await event.create(req.body)
-    res.send(newEvent)
-  } catch (e: any) {
-    res.statusCode = 500
-    res.send(e.message)
-  }
+  // try {
+  //
+  //   const newEvent = await event.create(req.body)
+  //   res.send(newEvent)
+  // } catch (e: any) {
+  //   res.statusCode = 500
+  //   res.send(e.message)
+  // }
+  const newEvent = await eventsRepository.addEvent(req.body)
+  res.send(newEvent)
 })
 
 eventsRouter.delete('/:id', async (req, res) => {
