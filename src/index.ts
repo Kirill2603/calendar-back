@@ -4,7 +4,7 @@ import { router } from './routes/router'
 import cors from 'cors'
 
 const app: Express = express()
-const DB_URL = 'mongodb+srv://kirill:kirill@cluster0.9120nn6.mongodb.net/calendar?retryWrites=true&w=majority'
+const DB_URL = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 3000;
 
 app.use(cors())

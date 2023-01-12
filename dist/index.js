@@ -17,7 +17,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const router_1 = require("./routes/router");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const DB_URL = 'mongodb+srv://kirill:kirill@cluster0.9120nn6.mongodb.net/calendar?retryWrites=true&w=majority';
+const DB_URL = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 3000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
