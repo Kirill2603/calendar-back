@@ -16,6 +16,8 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const router_1 = require("./routes/router");
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const app = (0, express_1.default)();
 const DB_URL = process.env.MONGODB_URI || 'mongodb+srv://vercel-admin-user:2AJZ42DYNoRNiXrd@cluster0.9120nn6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 3000;
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api', router_1.router);
 app.get('/favicon.ico', (req, res) => res.status(204));
+console.log(process.env.PORT);
 app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(DB_URL);
