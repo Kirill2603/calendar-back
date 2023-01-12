@@ -27,7 +27,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
-    res.end(`<div>${process.env.MONGODB_URI}</div>`);
+    res.end(`<div>Hello!</div>`);
 });
 app.use('/events', eventsRouter_1.eventsRouter);
 const startApp = () => __awaiter(void 0, void 0, void 0, function* () {

@@ -15,11 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eventsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const eventModel_1 = require("../models/eventModel");
-const eventRepository_1 = require("../eventRepository");
 exports.eventsRouter = express_1.default.Router({ mergeParams: true });
 exports.eventsRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.send(yield eventModel_1.event.findByIdAndUpdate(req.params.id, { '$set': req.body }, {
+        res.send(yield eventModel_1.event.findByIdAndUpdate(req.params.id, { $set: req.body }, {
             new: true,
             runValidators: true,
         }));
@@ -30,19 +29,20 @@ exports.eventsRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0,
     }
 }));
 exports.eventsRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // try {
-    //   res.send(await event.findById(req.params.id))
-    // } catch (e: any) {
-    //   res.statusCode = 500
-    //   res.send(e.message)
-    // }
-    // const event = await eventsRepository.getEvent(req.params.id)
-    // res.send(event)
+    try {
+        res.send(yield eventModel_1.event.findById(req.params.id));
+    }
+    catch (e) {
+        res.statusCode = 500;
+        res.send(e.message);
+    }
 }));
 exports.eventsRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.query.start && req.query.end) {
         try {
-            const eventsForMonth = yield eventModel_1.event.find({ date: { $gte: req.query.start, $lte: req.query.end } });
+            const eventsForMonth = yield eventModel_1.event.find({
+                date: { $gte: req.query.start, $lte: req.query.end },
+            });
             res.send(eventsForMonth);
         }
         catch (e) {
@@ -58,21 +58,16 @@ exports.eventsRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, fu
             res.send(e.message);
         }
     }
-    // if (req.query.start && req.query.end) {
-    //   res.send(await eventsRepository.getEventsInterval(req.query.start as any, req.query.end as any))
-    // } else res.send(await eventsRepository.getEvents())
 }));
 exports.eventsRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // try {
-    //
-    //   const newEvent = await event.create(req.body)
-    //   res.send(newEvent)
-    // } catch (e: any) {
-    //   res.statusCode = 500
-    //   res.send(e.message)
-    // }
-    const newEvent = yield eventRepository_1.eventsRepository.addEvent(req.body);
-    res.send(newEvent);
+    try {
+        const newEvent = yield eventModel_1.event.create(req.body);
+        res.send(newEvent);
+    }
+    catch (e) {
+        res.statusCode = 500;
+        res.send(e.message);
+    }
 }));
 exports.eventsRouter.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
