@@ -27,7 +27,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
-    res.end(`<div>Hello</div>`);
+    res.end(`<div>${process.env.MONGODB_URI}</div>`);
 });
 app.use('/api', router_1.router);
 app.get('/favicon.ico', (req, res) => res.status(204));

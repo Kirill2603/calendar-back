@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  res.end(`<div>DB_URL</div>`)
+  res.end(`<div>${process.env.MONGODB_URI}</div>`)
 })
 
 
