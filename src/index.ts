@@ -24,7 +24,7 @@ app.listen(PORT, async () => {
   try {
     await mongoose.connect(DB_URL)
     mongoose.set('runValidators', true)
-    console.log(`⚡️[server]: Server is running at http://localhost:${process.env.PORT || 3001}`)
+    console.log(`⚡️[server]: Server is running at http://localhost:${process.env.PORT || 3000}`)
   } catch (e) {
     console.log(e)
   }
