@@ -25,29 +25,32 @@ eventsRouter.get('/:id', async (req, res) => {
   //   res.statusCode = 500
   //   res.send(e.message)
   // }
-  const event = await eventsRepository.getEvent(req.params.id)
-  res.send(event)
+
+  // const event = await eventsRepository.getEvent(req.params.id)
+  // res.send(event)
 })
 
 eventsRouter.get('/', async (req, res) => {
-//   if (req.query.start && req.query.end) {
-//     try {
-//       const eventsForMonth = await event.find({date: {$gte: req.query.start, $lte: req.query.end}})
-//       res.send(eventsForMonth)
-//     } catch (e: any) {
-//       console.log(e);
-//     }
-//   } else {
-//     try {
-//       res.send(await event.find({}))
-//     } catch (e: any) {
-//       res.statusCode = 500
-//       res.send(e.message)
-//     }
-// }
   if (req.query.start && req.query.end) {
-    res.send(await eventsRepository.getEventsInterval(req.query.start as any, req.query.end as any))
-  } else res.send(await eventsRepository.getEvents())
+    try {
+      const eventsForMonth = await event.find({date: {$gte: req.query.start, $lte: req.query.end}})
+      res.send(eventsForMonth)
+    } catch (e: any) {
+      console.log(e);
+    }
+  } else {
+    try {
+      res.send(await event.find({}))
+    } catch (e: any) {
+      res.statusCode = 500
+      res.send(e.message)
+    }
+}
+
+
+  // if (req.query.start && req.query.end) {
+  //   res.send(await eventsRepository.getEventsInterval(req.query.start as any, req.query.end as any))
+  // } else res.send(await eventsRepository.getEvents())
 
 
 })

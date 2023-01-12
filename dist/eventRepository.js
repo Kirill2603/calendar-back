@@ -10,27 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eventsRepository = void 0;
-const db_1 = require("./db/db");
-const mongodb_1 = require("mongodb");
 const eventModel_1 = require("./models/eventModel");
 exports.eventsRepository = {
-    getEvents() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return db_1.eventsCollection.find().toArray();
-        });
-    },
-    getEvent(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return db_1.eventsCollection.findOne({ _id: new mongodb_1.ObjectId(id) });
-        });
-    },
-    getEventsInterval(start, end) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log(start, end);
-            return db_1.eventsCollection
-                .find({ date: { "$gte": Number(start), "$lt": Number(end) } }).toArray();
-        });
-    },
+    // async getEvents() {
+    //     return eventsCollection.find().toArray()
+    // },
+    // async getEvent(id: string) {
+    //     return eventsCollection.findOne({_id: new ObjectId(id) })
+    // },
+    // async getEventsInterval (start: number, end: number) {
+    //     console.log(start, end)
+    //     return eventsCollection
+    //         .find({date: {"$gte": Number(start) , "$lt": Number(end) }}).toArray()
+    // },
     addEvent(body) {
         return __awaiter(this, void 0, void 0, function* () {
             const newasd = yield eventModel_1.event.create(body);

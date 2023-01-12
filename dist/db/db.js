@@ -40,19 +40,24 @@ const dotenv = __importStar(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
 dotenv.config();
 // Connection URL
-const url = process.env.MONGODB_URI;
-console.log('url :', url);
+const url = process.env.MONGODB_URI || '';
 if (!url) {
     throw new Error('❗ Url doesn\'t found');
 }
 // export const eventsCollection = client.db().collection('events');
-const runDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
+// export const runDb = async () => {
+//     try {
+//         await mongoose.connect(url);
+//         console.log('✅ Connected successfully to server');
+//     } catch (e) {
+//         console.log('❗ Don\'t connected successfully to server');
+//     }
+// };
+runDb().catch(err => console.log(err));
+function runDb() {
+    return __awaiter(this, void 0, void 0, function* () {
         yield mongoose_1.default.connect(url);
-        console.log('✅ Connected successfully to server');
-    }
-    catch (e) {
-        console.log('❗ Don\'t connected successfully to server');
-    }
-});
+        // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+    });
+}
 exports.runDb = runDb;
