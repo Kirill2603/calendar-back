@@ -1,19 +1,21 @@
-import express, { Express } from 'express'
-import mongoose from 'mongoose'
-import { router } from './routes/router'
-import cors from 'cors'
-import dotenv from 'dotenv'
+import express, { Express} from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import "dotenv/config";
+import {router} from "./routes/router";
 
-dotenv.config();
+const PORT = process.env.PORT || 3000;
+const DB_URL = process.env.MONGODB_URI;
+
+if (!DB_URL) {
+  throw new Error('DB_URI not found')
+}
 
 const app: Express = express()
 
-const DB_URL = process.env.MONGODB_URI || 'mongodb+srv://vercel-admin-user:2AJZ42DYNoRNiXrd@cluster0.9120nn6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const PORT = process.env.PORT || 3000;
-
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   res.end(`<div>Hello</div>`)
