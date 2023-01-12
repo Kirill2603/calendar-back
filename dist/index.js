@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const mongoose_1 = __importDefault(require("mongoose"));
 require("dotenv/config");
-const router_1 = require("./routes/router");
+const eventsRouter_1 = require("./routes/eventsRouter");
+const db_1 = require("./db");
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.MONGODB_URI;
 if (!DB_URL) {
@@ -29,16 +29,11 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
     res.end(`<div>${process.env.MONGODB_URI}</div>`);
 });
-app.use('/api', router_1.router);
-app.get('/favicon.ico', (req, res) => res.status(204));
-console.log(process.env.PORT);
-app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield mongoose_1.default.connect(DB_URL);
-        mongoose_1.default.set('runValidators', true);
-        console.log(`⚡️[server]: Server is running at http://localhost:${process.env.PORT || 3000}`);
-    }
-    catch (e) {
-        console.log(e);
-    }
-}));
+app.use('/events', eventsRouter_1.eventsRouter);
+const startApp = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield (0, db_1.runDb)();
+    app.listen(PORT, () => {
+        console.log(`Example app listening on port ${PORT}`);
+    });
+});
+startApp();
